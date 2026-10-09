@@ -1,0 +1,10 @@
+# Environment and system files
+.DS_Store
+Thumbs.db
+*.log
+
+# Dynamic Uploads (keep directory structure with .gitkeep if needed)
+uploads/signatures/*
+uploads/seals/*
+!uploads/signatures/.gitkeep
+!uploads/seals/.gitkeep

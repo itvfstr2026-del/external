@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&amp;family=Inter:wght@600;700;800&amp;display=swap');
+      .brand-title {
+        font-family: 'Montserrat', 'Arial Black', sans-serif;
+        font-weight: 900;
+        font-size: 78px;
+        fill: #E60000;
+        letter-spacing: 2px;
+      }
+      .brand-sub {
+        font-family: 'Inter', 'Arial', sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        fill: #111111;
+        letter-spacing: 1px;
+      }
+      .banner-text {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        font-weight: 700;
+        font-size: 21px;
+        fill: #FFFFFF;
+        letter-spacing: 0.5px;
+      }
+    </style>
+    <filter id="subtle-shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Left Shield Emblem -->
+  <g transform="translate(15, 30)">
+    <!-- Shield Border / Base -->
+    <path d="M 20 20 L 120 20 Q 120 90 70 140 Q 20 90 20 20 Z" 
+          fill="#FFFFFF" stroke="#7C89E8" stroke-width="6" stroke-linejoin="round"/>
+    
+    <!-- Shield Background Inner -->
+    <path d="M 24 24 L 116 24 Q 116 88 70 134 Q 24 88 24 24 Z" 
+          fill="#EEF1FF"/>
+
+    <!-- Emblem Wheel Spokes (Violet & Blue) -->
+    <g transform="translate(70, 75)">
+      <!-- Ray segments -->
+      <path d="M -7 -7 L -25 -42 L 0 -45 L 7 -7 Z" fill="#7C89E8"/>
+      <path d="M 7 -7 L 42 -25 L 45 0 L 7 7 Z" fill="#7C89E8"/>
+      <path d="M 7 7 L 25 42 L 0 45 L -7 7 Z" fill="#7C89E8"/>
+      <path d="M -7 7 L -42 25 L -45 0 L -7 -7 Z" fill="#7C89E8"/>
+
+      <path d="M 0 -7 L 27 -35 L 35 -27 L 7 0 Z" fill="#0076F6"/>
+      <path d="M 7 0 L 35 27 L 27 35 L 0 7 Z" fill="#0076F6"/>
+      <path d="M 0 7 L -27 35 L -35 27 L -7 0 Z" fill="#0076F6"/>
+      <path d="M -7 0 L -35 -27 L -27 -35 L 0 -7 Z" fill="#0076F6"/>
+
+      <!-- Cross beams in vibrant Blue -->
+      <line x1="0" y1="-45" x2="0" y2="45" stroke="#0076F6" stroke-width="12" stroke-linecap="round"/>
+      <line x1="-45" y1="0" x2="45" y2="0" stroke="#0076F6" stroke-width="12" stroke-linecap="round"/>
+      <line x1="-32" y1="-32" x2="32" y2="32" stroke="#0076F6" stroke-width="10" stroke-linecap="round"/>
+      <line x1="32" y1="-32" x2="-32" y2="32" stroke="#0076F6" stroke-width="10" stroke-linecap="round"/>
+
+      <!-- Center Circle with Star -->
+      <circle cx="0" cy="0" r="18" fill="#0076F6" stroke="#FFFFFF" stroke-width="3"/>
+      <!-- 5-Point Star -->
+      <polygon points="0,-12 3.5,-3 12,-3 5,2.5 8,11 0,6 -8,11 -5,2.5 -12,-3 -3.5,-3" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Main Text: VIGNAN'S -->
+  <text x="160" y="115" class="brand-title">VIGNAN’S</text>
+
+  <!-- Subtitle: FOUNDATION FOR SCIENCE, TECHNOLOGY & RESEARCH -->
+  <text x="162" y="152" class="brand-sub">FOUNDATION FOR SCIENCE, TECHNOLOGY &amp; RESEARCH</text>
+
+  <!-- Bottom Blue Banner -->
+  <g transform="translate(15, 185)">
+    <rect x="0" y="0" width="670" height="42" rx="4" ry="4" fill="#0076F6" />
+    <text x="335" y="28" class="banner-text" text-anchor="middle">(Deemed to be University) - Estd. u/s 3 of UGC Act 1956</text>
+  </g>
+</svg>
