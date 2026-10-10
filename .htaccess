@@ -1,41 +1,38 @@
 # ==============================================================================
-# Vignan's Question Paper Feedback Portal - Apache Configuration (.htaccess)
+# InfinityFree Apache Configuration (.htaccess)
 # ==============================================================================
 
 # 1. Set default landing page
-DirectoryIndex index.php
+DirectoryIndex index.php index.html
 
-# 2. Disable directory listing (prevents users from seeing folder files)
-Options -Indexes
-
-# 3. Default Charset
+# 2. Set default character encoding
 AddDefaultCharset UTF-8
 
-# 4. Enable Rewrite Engine
+# 3. Enable URL Rewriting
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
 </IfModule>
 
-# 5. Protect sensitive files from direct web access
-<FilesMatch "^(schema\.sql|render\.yaml|Dockerfile|\.gitignore|\.dockerignore|\.git.*|README\.md)$">
+# 4. Block direct web access to sensitive project files
+<FilesMatch "\.(sql|md|yaml|dockerignore)$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
-    <IfModule !mod_authz_core.c>
-        Order allow,deny
-        Deny from all
+</FilesMatch>
+
+<FilesMatch "^(Dockerfile|\.gitignore)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
     </IfModule>
 </FilesMatch>
 
-# 6. Protect sensitive folders (config, templates) from direct file browsing
+# 5. Prevent direct HTTP requests into config folder
 <IfModule mod_rewrite.c>
-    RewriteRule ^config(/.*)?$ - [F,L]
+    RewriteRule ^config/.*$ - [F,L]
 </IfModule>
 
-# 7. MIME Types for Assets
+# 6. Correct MIME types for SVG and web assets
 <IfModule mod_mime.c>
     AddType image/svg+xml .svg .svgz
-    AddType application/font-woff2 .woff2
-    AddType application/font-woff .woff
 </IfModule>
