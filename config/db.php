@@ -17,6 +17,10 @@ class DB {
                     PDO::ATTR_EMULATE_PREPARES => false,
                 ];
 
+                if (getenv('DB_SSL') === 'true' || getenv('DB_SSL') === '1') {
+                    $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+                }
+
                 try {
                     self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
                 } catch (PDOException $e) {

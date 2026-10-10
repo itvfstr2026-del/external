@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: vignan-feedback-portal
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: "vignan_qp_feedback"
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: DB_SSL
+        value: "false"
+      - key: ADMIN_PASSWORD
+        value: "admin123"

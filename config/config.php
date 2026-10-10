@@ -48,17 +48,21 @@ define('REMARK_MAX_CHARS', 150);
 define('OVERALL_MAX_CHARS', 1000);
 
 // Base URL detection
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) ? "https://" : "http://";
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-$scriptDir = str_replace('\\', '/', dirname($scriptName));
-if ($scriptDir === '.' || $scriptDir === '/' || $scriptDir === '\\') {
-    $baseUri = '/external';
+if (getenv('BASE_URL')) {
+    define('BASE_URL', rtrim(getenv('BASE_URL'), '/'));
 } else {
-    $baseUri = rtrim($scriptDir, '/');
-    $baseUri = preg_replace('/(\/api|\/includes|\/scripts)$/', '', $baseUri);
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $scriptDir = str_replace('\\', '/', dirname($scriptName));
+    if ($scriptDir === '.' || $scriptDir === '/' || $scriptDir === '\\') {
+        $baseUri = '';
+    } else {
+        $baseUri = rtrim($scriptDir, '/');
+        $baseUri = preg_replace('/(\/api|\/includes|\/scripts)$/', '', $baseUri);
+    }
+    define('BASE_URL', rtrim($protocol . $host . $baseUri, '/'));
 }
-define('BASE_URL', rtrim($protocol . $host . $baseUri, '/'));
 
 // Timezone
 date_default_timezone_set('Asia/Kolkata');
