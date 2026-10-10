@@ -90,14 +90,16 @@ function docgen_set_cell_text(DOMDocument $dom, DOMElement $cell, string $text, 
 }
 
 function docgen_tick_cell(DOMElement $cell): bool {
-    $BOX = "\xE2\x96\xA1"; // ☐
-    $TICK = "\xE2\x98\x91"; // ☑
+    $boxes = ["\xE2\x98\x90", "\xE2\x96\xA1", "☐", "□", "▢"];
+    $TICK = "\xE2\x98\x91"; // ☑ Ballot box with checkmark
 
     $tNodes = $cell->getElementsByTagName('t');
     foreach ($tNodes as $t) {
-        if (str_contains($t->textContent, $BOX)) {
-            $t->textContent = preg_replace('/' . preg_quote($BOX, '/') . '/', $TICK, $t->textContent, 1);
-            return true;
+        foreach ($boxes as $box) {
+            if (str_contains($t->textContent, $box)) {
+                $t->textContent = preg_replace('/' . preg_quote($box, '/') . '/', $TICK, $t->textContent, 1);
+                return true;
+            }
         }
     }
     return false;
@@ -398,7 +400,7 @@ function docgen_render_document(int $course_id, string $fmt = 'docx'): string {
     }
 
     // Retained documents & ATR date in paragraphs
-    $BOX = "\xE2\x96\xA1"; // ☐
+    $boxes = ["\xE2\x98\x90", "\xE2\x96\xA1", "☐", "□", "▢"];
     $TICK = "\xE2\x98\x91"; // ☑
 
     $paragraphs = $dom->getElementsByTagName('p');
@@ -424,10 +426,17 @@ function docgen_render_document(int $course_id, string $fmt = 'docx'): string {
             $tNodes = $p->getElementsByTagName('t');
             $boxIdx = 0;
             foreach ($tNodes as $t) {
-                if (str_contains($t->textContent, $BOX)) {
-                    if (!empty($retained[$boxIdx])) {
-                        $t->textContent = str_replace($BOX, $TICK, $t->textContent);
+                $hasBox = false;
+                foreach ($boxes as $box) {
+                    if (str_contains($t->textContent, $box)) {
+                        $hasBox = true;
+                        if (!empty($retained[$boxIdx])) {
+                            $t->textContent = str_replace($box, $TICK, $t->textContent);
+                        }
+                        break;
                     }
+                }
+                if ($hasBox) {
                     $boxIdx++;
                 }
             }
