@@ -17,23 +17,23 @@ define('UPLOADS_PATH', BASE_PATH . '/uploads');
 define('TEMPLATES_PATH', BASE_PATH . '/templates');
 define('TEMPLATE_DOCX_PATH', TEMPLATES_PATH . '/feedback_template.docx');
 
-// Ensure essential directories exist
+// Ensure essential directories exist safely
 if (!file_exists(UPLOADS_PATH)) {
-    mkdir(UPLOADS_PATH, 0777, true);
+    @mkdir(UPLOADS_PATH, 0777, true);
 }
 if (!file_exists(UPLOADS_PATH . '/signatures')) {
-    mkdir(UPLOADS_PATH . '/signatures', 0777, true);
+    @mkdir(UPLOADS_PATH . '/signatures', 0777, true);
 }
 if (!file_exists(UPLOADS_PATH . '/seals')) {
-    mkdir(UPLOADS_PATH . '/seals', 0777, true);
+    @mkdir(UPLOADS_PATH . '/seals', 0777, true);
 }
 
-// Database Credentials (XAMPP Default)
-define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+// Database Credentials
+define('DB_HOST', getenv('DB_HOST') ?: 'sql211.infinityfree.com');
 define('DB_PORT', getenv('DB_PORT') ?: '3306');
-define('DB_NAME', getenv('DB_NAME') ?: 'vignan_qp_feedback');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_NAME', getenv('DB_NAME') ?: 'if0_43129095_externalfeedback');
+define('DB_USER', getenv('DB_USER') ?: 'if0_43129095');
+define('DB_PASS', getenv('DB_PASS') ?: 'L23cGvfcDKR5qpE');
 
 // Application & Security Configuration
 define('APP_NAME', "Vignan's Question Paper Feedback Portal");

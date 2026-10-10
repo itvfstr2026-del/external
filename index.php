@@ -110,10 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div id="adminFields" style="<?= $role !== 'admin' ? 'display:none;' : '' ?>">
             <div class="form-group">
                 <label class="form-label" for="adminPassword">Administrator Password</label>
-                <input type="password" name="password" id="adminPassword" class="form-control" placeholder="Enter password" <?= $role === 'admin' ? 'required' : '' ?>>
-                <div class="form-help">
-                    <span>Default: <code>admin123</code></span>
-                </div>
+                <input type="password" name="password" id="adminPassword" class="form-control" placeholder="Enter administrator password" <?= $role === 'admin' ? 'required' : '' ?>>
             </div>
         </div>
 
@@ -121,13 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Portal
         </button>
     </form>
-
-    <!-- Quick Demo Testing Accordion -->
-    <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color); text-align: center;">
-        <a href="<?= BASE_URL ?>/seed.php" class="btn btn-outline btn-sm" style="color: var(--vignan-blue); font-size: 0.8rem;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Load Demo Sample Courses &amp; Accounts
-        </a>
-    </div>
 </div>
 
 <script>

@@ -168,9 +168,9 @@ $setters = services_list_people('setter');
             </table>
         </div>
 
-        <h3 style="margin: 1.5rem 0 0.75rem; color: var(--dark-primary);"><i class="fa-solid fa-shield-halved" style="color: var(--vignan-red);"></i> Administrator Credentials</h3>
+        <h3 style="margin: 1.5rem 0 0.75rem; color: var(--dark-primary);"><i class="fa-solid fa-shield-halved" style="color: var(--vignan-red);"></i> Administrator Account</h3>
         <div style="background: var(--bg-alt); padding: 1rem 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
-            <strong>Role:</strong> Administrator &bull; <strong>Password:</strong> <code>admin123</code>
+            <strong>Role:</strong> Administrator &bull; <em>(Use your configured master admin password)</em>
         </div>
 
         <div style="margin-top: 1.5rem; text-align: center;">
