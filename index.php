@@ -1,9 +1,34 @@
 <?php
-/**
- * Vignan Question Paper Feedback Portal - Login Screen
- */
-require_once __DIR__ . '/config/config.php';
-require_once __DIR__ . '/includes/auth.php';
+// Pre-flight check for required directories on cloud/shared hosting
+$configPath = file_exists(__DIR__ . '/config/config.php') ? __DIR__ . '/config/config.php' : (file_exists(__DIR__ . '/config.php') ? __DIR__ . '/config.php' : null);
+$authPath = file_exists(__DIR__ . '/includes/auth.php') ? __DIR__ . '/includes/auth.php' : (file_exists(__DIR__ . '/auth.php') ? __DIR__ . '/auth.php' : null);
+
+if (!$configPath || !$authPath) {
+    $missing = [];
+    if (!$configPath) $missing[] = "<strong>config/</strong> folder (containing <code>config.php</code> and <code>db.php</code>)";
+    if (!$authPath) $missing[] = "<strong>includes/</strong> folder (containing <code>auth.php</code>, <code>services.php</code>, <code>docgen.php</code>, etc.)";
+    
+    echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Upload Setup Required</title><style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f1f5f9;color:#0f172a;padding:2rem;}.card{max-width:620px;margin:2rem auto;background:#fff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.08);padding:2rem;border-top:6px solid #e11d48;}h2{color:#9f1239;margin-top:0;}ul{line-height:1.8;}ol{line-height:1.7;background:#f8fafc;padding:1.25rem 2rem;border-radius:8px;}code{background:#e2e8f0;padding:2px 6px;border-radius:4px;color:#be123c;font-weight:600;}.btn{display:inline-block;background:#0284c7;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;margin-top:1rem;}</style></head><body>
+    <div class='card'>
+        <h2><i class='fa-solid fa-folder-open'></i> Missing Subfolders on Server</h2>
+        <p>Your web server found <code>index.php</code> in <code>htdocs/</code>, but the following required folders are missing:</p>
+        <ul>";
+    foreach ($missing as $m) echo "<li>$m</li>";
+    echo "</ul>
+        <h3>How to fix in InfinityFree File Manager:</h3>
+        <ol>
+            <li>Go to InfinityFree <strong>File Manager</strong> &rarr; enter <strong><code>htdocs</code></strong>.</li>
+            <li>Click <strong>New Folder</strong> &rarr; create folder named <strong><code>config</code></strong> &rarr; upload <code>config.php</code> and <code>db.php</code> into it.</li>
+            <li>Click <strong>New Folder</strong> &rarr; create folder named <strong><code>includes</code></strong> &rarr; upload all files from <code>includes/</code> into it.</li>
+            <li>Also upload the <strong><code>assets</code></strong> and <strong><code>templates</code></strong> folders into <code>htdocs</code>.</li>
+        </ol>
+        <p><a href='' class='btn'>Click to Refresh after uploading</a></p>
+    </div></body></html>";
+    exit;
+}
+
+require_once $configPath;
+require_once $authPath;
 
 if (is_logged_in()) {
     $role = user_role();
